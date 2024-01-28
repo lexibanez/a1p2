@@ -76,6 +76,21 @@ def delete_file(directory):
     else:
         print("File does not exist.")
 
+def read_file(directory):
+    if directory.is_file():
+        if directory.suffix == '.dsu':
+            with open(directory, 'r') as file:
+                first_char = file.read(1)
+                if not first_char:
+                    print("EMPTY")
+                else:
+                    file.seek(0)
+                    for line in file:
+                        print(line)
+        else:
+            print("File is not a .dsu file.")
+    else:
+        print("File does not exist.")
 
 
 def main():
@@ -100,7 +115,7 @@ def main():
         elif command.lower() == 'd':
             delete_file(directory)
         elif command.lower() == 'r':
-            pass
+            read_file(directory)
         else:
             print("Invalid command.")
             continue
