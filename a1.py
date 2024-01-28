@@ -1,3 +1,13 @@
+# a1.py
+
+# Starter code for assignment 1 in ICS 32 Programming with Software Libraries in Python
+
+# Replace the following placeholders with your information.
+
+# Lex Ibanez
+# laibanez@uci.edu
+# 70063614
+
 from pathlib import Path
 
 # test path
@@ -49,6 +59,7 @@ def list_directory(directory, options):
             if '-r' in options:
                 list_directory(directory, options)
 
+
 def create_file(directory, options):
     if not directory.is_dir():
         print("Path is not a directory.")
@@ -65,6 +76,7 @@ def create_file(directory, options):
     else:
         print("Option -n not provided.")
 
+
 def delete_file(directory):
     if directory.is_file():
         if directory.suffix == '.dsu':
@@ -75,6 +87,7 @@ def delete_file(directory):
             print("File is not a .dsu file.")
     else:
         print("File does not exist.")
+
 
 def read_file(directory):
     if directory.is_file():
@@ -88,14 +101,14 @@ def read_file(directory):
                     for line in file:
                         print(line)
         else:
-            print("File is not a .dsu file.")
+            print("ERROR")
     else:
         print("File does not exist.")
 
 
 def main():
     while True:
-        user_input = input("Enter Command: ")
+        user_input = input()
         command, *args = user_input.split()
         options = []
         if len(args) > 1:
