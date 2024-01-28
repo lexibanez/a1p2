@@ -50,6 +50,9 @@ def list_directory(directory, options):
                 list_directory(directory, options)
 
 def create_file(directory, options):
+    if not directory.is_dir():
+        print("Path is not a directory.")
+        return
     if "-n" in options:
         index = options.index('-n')
         if index + 1 < len(options):
@@ -62,11 +65,18 @@ def create_file(directory, options):
     else:
         print("Option -n not provided.")
 
-def delete_directory(directory, options):
-    pass
+def delete_file(directory):
+    if directory.is_file():
+        if directory.suffix == '.dsu':
+            file_name = directory
+            directory.unlink()
+            print(f'{file_name} DELETED')
+        else:
+            print("File is not a .dsu file.")
+    else:
+        print("File does not exist.")
 
-def read_directory(directory, options):
-    pass
+
 
 def main():
     while True:
@@ -88,7 +98,7 @@ def main():
         elif command.lower() == 'c':
             create_file(directory, options)
         elif command.lower() == 'd':
-            pass
+            delete_file(directory)
         elif command.lower() == 'r':
             pass
         else:
