@@ -13,6 +13,13 @@ from pathlib import Path
 # test path
 # C:\Users\lexib\OneDrive\Desktop\test
 
+
+def get_last_option(options):
+    if len(options) == 3:
+        return options[2]
+    elif len(options) == 4:
+        return options[3]
+
 def list_directory(directory, options):
     contents = list(directory.iterdir())
 
@@ -20,10 +27,7 @@ def list_directory(directory, options):
     directories = [x for x in contents if x.is_dir()] # sort contents for directories
 
     if '-e' in options:
-        if len(options) == 3:
-            suffix = options[2] # gets the suffix to be searched
-        elif len(options) == 4:
-            suffix = options[3] # gets the suffix to be searched
+        suffix = get_last_option(options)
     
         for file in files:
             if file.suffix == '.' + suffix:
@@ -33,10 +37,7 @@ def list_directory(directory, options):
                 list_directory(directory, options)
 
     elif '-s' in options:
-        if len(options) == 3:
-            search_file = options[2] # gets the file to be searched
-        elif len(options) == 4:
-            search_file = options[3] # gets the file to be searched
+        search_file = get_last_option(options)
 
         if Path(directory / search_file).is_file(): # checks if the search file has a path
             print(Path(directory / search_file))
