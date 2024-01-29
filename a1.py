@@ -62,7 +62,7 @@ def list_directory(directory, options):
 
 def create_file(directory, options):
     if not directory.is_dir():
-        print("Path is not a directory.")
+        print("ERROR")
         return
     if "-n" in options:
         index = options.index('-n')
@@ -72,9 +72,9 @@ def create_file(directory, options):
             new_path.touch()
             print(new_path)
         else:
-            print("No file name provided.")
+            print("ERROR")
     else:
-        print("Option -n not provided.")
+        print("ERROR")
 
 
 def delete_file(directory):
@@ -84,47 +84,51 @@ def delete_file(directory):
             directory.unlink()
             print(f'{file_name} DELETED')
         else:
-            print("File is not a .dsu file.")
+            print("ERROR")
     else:
-        print("File does not exist.")
+        print("ERROR")
 
 
 def read_file(directory):
     if directory.is_file():
         if directory.suffix == '.dsu':
             with open(directory, 'r') as file:
-                first_char = file.read(1)
-                if not first_char:
+                content = file.read()
+                if not content:
                     print("EMPTY")
                 else:
-                    file.seek(0)
-                    for line in file:
-                        print(line)
+                    print(content.strip())
         else:
             print("ERROR")
     else:
-        print("File does not exist.")
+        print("ERROR")
 
 
 def main():
     while True:
         user_input = input()
         command, *args = user_input.split()
+        
+        if command.lower() == 'q':
+            break
+
         options = []
         if len(args) > 1:
             options = args
         if args:
             directory = Path(args[0])
 
-        if command.lower() == 'q':
-            break
-        elif command.lower() == 'l': 
+        
+        if command.lower() == 'l': 
             if directory.is_dir():
                 list_directory(directory, options)
             else:
                 print('Could not find directory.')
         elif command.lower() == 'c':
-            create_file(directory, options)
+            try:
+                create_file(directory, options)
+            except UnboundLocalError:
+                print("ERROR")
         elif command.lower() == 'd':
             delete_file(directory)
         elif command.lower() == 'r':
