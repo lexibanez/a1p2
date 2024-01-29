@@ -6,11 +6,18 @@ program, the command line format is:
 
 
 COMMANDS AND INPUT:
-The user may choose between L and Q for commands. L, lists the
-contents of a directory. Q, quits the program. If the command
-is L, the user must input a path to a directory on their local
-computer. Entering the command will display the current files
-and directories in the specified path.
+The user may choose between Q, L, C, D, and R for commands. 
+L, lists the contents of a directory. Q, quits the program. 
+If the command is L, the user must input a path to a directory 
+on their local computer. Entering the command will display the 
+current files and directories in the specified path. The C 
+command creates a new file in the specified directory. The 
+user must input the  option '-n' after the directory and then the 
+name of the file to be created. The file created will be a .dsu 
+file. The D command allows the user to delete a file in the provided
+directory. You must enter the full path name, with the filename at
+the end. The R command reads and prints the contents of a specified 
+file. If the file is empty, the program will notify the user. 
 
 OPTIONS:
 Along with displaying contents of directories, the user can
