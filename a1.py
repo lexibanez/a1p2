@@ -1,6 +1,7 @@
 # a1.py
 
-# Starter code for assignment 1 in ICS 32 Programming with Software Libraries in Python
+# Starter code for assignment 1 in ICS 32
+# Programming with Software Libraries in Python
 
 # Replace the following placeholders with your information.
 
@@ -20,15 +21,17 @@ def get_last_option(options):
     elif len(options) == 4:
         return options[3]
 
+
 def list_directory(directory, options):
     contents = list(directory.iterdir())
-
-    files = [x for x in contents if x.is_file()] # sort contents for files
-    directories = [x for x in contents if x.is_dir()] # sort contents for directories
+    # sort contents for files
+    files = [x for x in contents if x.is_file()]
+    # sort contents for directories
+    directories = [x for x in contents if x.is_dir()]
 
     if '-e' in options:
         suffix = get_last_option(options)
-    
+
         for file in files:
             if file.suffix == '.' + suffix:
                 print(file)
@@ -39,7 +42,8 @@ def list_directory(directory, options):
     elif '-s' in options:
         search_file = get_last_option(options)
 
-        if Path(directory / search_file).is_file(): # checks if the search file has a path
+        # checks if the search file has a path
+        if Path(directory / search_file).is_file():
             print(Path(directory / search_file))
         for directory in directories:
             if '-r' in options:
@@ -109,7 +113,7 @@ def main():
     while True:
         user_input = input()
         command, *args = user_input.split()
-        
+
         if command.lower() == 'q':
             break
 
@@ -119,8 +123,7 @@ def main():
         if args:
             directory = Path(args[0])
 
-        
-        if command.lower() == 'l': 
+        if command.lower() == 'l':
             if directory.is_dir():
                 list_directory(directory, options)
             else:
@@ -138,6 +141,6 @@ def main():
             print("Invalid command.")
             continue
 
-        
+
 if __name__ == '__main__':
     main()
